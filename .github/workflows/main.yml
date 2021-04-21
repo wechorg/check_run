@@ -17,6 +17,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env:
+      GSHA: ${{ github.event.after }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -34,4 +36,4 @@ jobs:
           -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
           https://api.github.com/repos/wechorg/check_run/check-runs \
-          -d "{\"name\":\"awesome\",\"head_sha\":\"$GITHUB_SHA\",\"status\":\"completed\",\"conclusion\":\"neutral\"}"
+          -d "{\"name\":\"awesome\",\"head_sha\":\"$GSHA\",\"status\":\"completed\",\"conclusion\":\"neutral\"}"
